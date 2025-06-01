@@ -1,0 +1,16 @@
+.header-conteiner{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E4053;
+    padding: 0px;
+    margin: 0px;
+}
+
+.header-conteiner>h1 {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 70px;
+}

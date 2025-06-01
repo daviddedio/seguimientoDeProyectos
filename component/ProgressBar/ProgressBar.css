@@ -1,0 +1,25 @@
+.progressbar-conteiner {
+    width: 100%;
+    height: 10px;
+    position: relative;
+    background-color: gainsboro;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar {
+    position: absolute;
+    display: flex;
+    background-color: cadetblue;
+    height: 10px;
+}
+
+.progressbar-conteiner>p{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+}

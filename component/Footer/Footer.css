@@ -1,0 +1,12 @@
+.footer-conteiner {
+    height: 100px;
+    background-color: #1E4053;
+    padding: 10px;
+    color: white;
+    size: 20px;
+    font-weight: bold;
+}
+
+.footer-conteine>a:link{
+    color: green;
+}

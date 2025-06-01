@@ -1,0 +1,39 @@
+.general-conteiner{
+    background-color: #F7F7F7;
+    height: auto;
+}
+
+.drag-n-drop{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    overflow: scroll;
+}
+
+#proyectos{
+    width: 100%;
+}
+
+.descripcion-proyecto>h2{
+    margin: 0px;
+    padding: 0px;
+}
+
+.descripcion-proyecto{
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    opacity: 0;
+    height: 100px;
+    transition: opacity 1s ease-in-out; 
+}
+
+.visible-title{
+    opacity: 1;
+}

@@ -1,0 +1,89 @@
+:root {
+    --inTime: rgb(152, 251, 152);
+    --Late: rgb(255, 74, 101);
+    --Close: rgb(255, 204, 102);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 0px;
+    width: 100%;
+    max-height: 200px;
+    height: 125px;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.vis{
+    opacity: 1;
+}
+
+
+.card-header {
+    padding: 5px;
+    display: flex;
+}
+
+.inTime {
+    background-color: var(--inTime);
+}
+
+.closeLate {
+    background-color: var(--Close);
+}
+
+.late {
+    background-color: var(--Late)
+}
+
+.card-header>i {
+    margin: 0px 5px;
+    position: relative;
+}
+
+.toolTip {
+    color: white;
+    background: black;
+    padding: 3px;
+    border-radius: 5px;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    width: 110px;
+    margin-left: -55px;
+    left: 50%;
+    top: -200%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+}
+
+/*arrow*/
+.toolTipConteiner>.toolTip::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: solid 5px transparent;
+    border-top-color: black;
+}
+
+.toolTipConteiner:hover>.toolTip {
+    visibility: visible;
+}
+
+.card-body>h3 {
+    padding: 0px;
+    margin: 5px;
+}
+
+.card-body{
+    overflow-y: scroll;
+}
+

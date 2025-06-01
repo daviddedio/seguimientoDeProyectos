@@ -1,0 +1,72 @@
+.navbar {
+    width: 100%;
+    height: 40px;
+    background-color: #333333;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.select-proyect,
+.options-items,
+.login-button {
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+.login-button{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+
+.login-button>button{
+    margin: 0px;
+    padding: 0px;
+    width: 40px;
+    border: none;
+    border-radius: 50%;
+}
+
+.select-proyect {
+    margin-left: 5px;
+}
+
+.select-proyect>span {
+    text-align: center;
+}
+
+.options-items>ul {
+    display: flex;
+    list-style: none;
+}
+
+.options-items>ul>li {
+    margin: 0px 5px;
+    height: 40px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    color: white;
+}
+
+.options-items>ul>li:hover {
+    background-color: #87CEEB;
+    color: black;
+}
+
+.options-items>ul>li:active {
+    background-color: red;
+}
+
+.enable {
+    background-color: red;
+}
+
+.disable {
+    background-color: none;
+}

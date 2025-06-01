@@ -1,0 +1,48 @@
+.all-conteiner{
+
+}
+
+.all-conteiner>h2{
+    text-align: center;
+}
+.proyect-conteiner {
+    display: flex;
+    flex-direction: row;
+    height: 250px;
+}
+
+.proyect-create {
+    width: 50%;
+    height: inherit;
+    padding: 0px 10px;
+    display: flex;
+    border-right: 1px solid black;
+}
+
+.proyect-create>form{
+    width: 100%;
+}
+
+.list-proyect {
+    width: 50%;
+    height: inherit;
+    overflow-y: scroll;
+}
+
+.list-proyect>h4{
+    margin: 0px;
+    padding: 10px;
+}
+
+.list-proyect>ul{
+    margin: 0px;
+}
+
+.list-proyect>ul>li:nth-child(odd){
+    background-color: gainsboro;
+}
+
+.list-proyect-delete{
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,29 @@
+.form-conteiner-login{
+    width: 80%;
+    margin: auto;
+}
+
+.form-conteiner-login>form{
+    width: 100%;
+}
+
+.form-conteiner-login>form>span{
+    text-align: center;
+    width: 100%;
+}
+
+.bloqueado{
+    color: red;
+}
+
+.no-bloqueado{
+    color: green;
+}
+
+.not-visible{
+    display: none;
+}
+
+.visible-error{
+    display: block;
+}

@@ -1,0 +1,19 @@
+.contenedor-autorizacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.imagen-error, .mensaje-error{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 22px;
+}
+
+.imagen-error{
+    width: 20%;
+    height: auto;
+}
