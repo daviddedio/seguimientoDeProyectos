@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./dbFirebase";
 import { getFirestore, collection, doc, setDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -10,6 +11,27 @@ import { getFirestore, collection, doc, setDoc, getDocs, updateDoc, addDoc, dele
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
+export const auth = getAuth(app)
+
+//iniciar secion
+export const logInUser = async(email, password)=>{
+    try {        
+        const userCredential = await signInWithEmailAndPassword(auth, email, password)
+        return 'ok'
+    } catch (error) {
+        return error.message
+    }
+}
+
+export const logOutUser = async()=>{
+    try {
+        await signOut(auth)
+        return 'out'
+    } catch (error) {
+        return error.message
+    }
+}
+
 
 export const getAllData = async (proyecto) => {
     const querySnapshot = await getDocs(collection(db, proyecto));

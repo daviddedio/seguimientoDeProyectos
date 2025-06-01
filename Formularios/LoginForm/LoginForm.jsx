@@ -1,7 +1,7 @@
 import './LoginForm.css'
 import { useState } from 'react'
 import { UseForm } from '../UseForm'
-import { getAllData } from '../../FireBase/conexion'
+import { logInUser } from '../../FireBase/conexion'
 import { ComponenteCarga } from '../../component/ComponenteCarga/ComponenteCarga'
 import { useGlobalContext } from '../../context/Context'
 
@@ -12,7 +12,7 @@ export const LoginForm = () => {
     const [bloqueado, setBloqueado] = useState('bloqueado')
     const [estadoLog, setEstadoLog] = useState('')
 
-    const { setOpenModal, setLogin } = useGlobalContext()
+    const { setOpenModal, setLogin, login } = useGlobalContext()
 
     const template = {
         user: '',
@@ -26,10 +26,9 @@ export const LoginForm = () => {
         e.preventDefault()
         setError('not-visible')
         setLoading(true)
-        const datos = await getAllData('Login')
-        console.log(datos[0])
-        console.log(formState)
-        if (datos[0].user === user && datos[0].Password === pass) {
+
+        const res = await logInUser(user, pass)
+        if (res === 'ok') {
             setLogin(true)
             setBloqueado('no-bloqueado')
             setError('visible-error')
@@ -43,30 +42,32 @@ export const LoginForm = () => {
     }
 
     const closeModal = () => {
-        setTimeout(() => {
-            setOpenModal(false)
-        }, 2000);
+        setOpenModal(false);
     }
 
     return (
         <>
-            <div className="form-conteiner-login">
-                <h2>Login</h2>
-                <form onSubmit={checkData}>
-                    <div className="inputPack">
-                        <label htmlFor="user">User</label>
-                        <input type="text" name="user" id="user" onChange={onInputTextChange} value={user} />
-                    </div>
-                    <div className="inputPack">
-                        <label htmlFor="pass">Password</label>
-                        <input type="password" name="pass" id="pass" onChange={onInputTextChange} value={pass} />
-                    </div>
-                    <div className="inputPack">
-                        {loading ? <ComponenteCarga /> : <button>Login</button>}
-                    </div>
-                    <span className={`${error} ${bloqueado}`}>{estadoLog}</span>
-                </form>
-            </div>
+            {login ?
+                <h2>Login Out</h2>
+                :
+                <div className="form-conteiner-login">
+                    <h2>Login</h2>
+                    <form onSubmit={checkData}>
+                        <div className="inputPack">
+                            <label htmlFor="user">User</label>
+                            <input type="text" name="user" id="user" onChange={onInputTextChange} value={user} />
+                        </div>
+                        <div className="inputPack">
+                            <label htmlFor="pass">Password</label>
+                            <input type="password" name="pass" id="pass" onChange={onInputTextChange} value={pass} />
+                        </div>
+                        <div className="inputPack">
+                            {loading ? <ComponenteCarga /> : <button>LogIn</button>}
+                        </div>
+                        <span className={`${error} ${bloqueado}`}>{estadoLog}</span>
+                    </form>
+                </div>
+            }
         </>
     )
 }

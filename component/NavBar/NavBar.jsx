@@ -1,7 +1,8 @@
 import './NavBar.css'
-import { useState } from 'react'
 import { useGlobalContext } from '../../context/Context'
 import { LoginForm } from '../../Formularios/LoginForm/LoginForm'
+import { LogOutComponent } from '../../Formularios/LogOutComponent/LogOutComponent'
+
 export const NavBar = ({ children, funcionAddItem, functionReviewProyect}) => {
 
     const { setOpenModal, setComponente, login } = useGlobalContext()
@@ -19,6 +20,11 @@ export const NavBar = ({ children, funcionAddItem, functionReviewProyect}) => {
         setOpenModal(true)
     }
 
+    const logOutUser = ()=>{
+        setComponente(<LogOutComponent/>)
+        setOpenModal(true)
+    }
+
     return (
         <div className='navbar'>
             { login && <div className="options-items">
@@ -32,7 +38,7 @@ export const NavBar = ({ children, funcionAddItem, functionReviewProyect}) => {
                 {children}
             </div>
             <div className="login-button">
-                <button onClick={loginUser}>login</button>
+                <button onClick={login ? logOutUser : loginUser}>{login ? "LogOut" : "LogIn"}</button>
             </div>
         </div>
     )
