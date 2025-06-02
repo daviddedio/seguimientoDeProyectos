@@ -4,9 +4,9 @@
     align-items: center;
     /* background-color: gainsboro; */
     background-image: url("https://i.pinimg.com/736x/aa/f6/67/aaf667515df57dd6c1b708f3e0d27623.jpg");
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-position: center;
-    width: 400px;
+    min-width: 400px;
     min-height: 150px;
     padding: 12px;
     border-radius: 8px;

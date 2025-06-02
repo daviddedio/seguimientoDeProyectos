@@ -29,6 +29,10 @@
     display: flex;
 }
 
+.card-body{
+    width: 350px;
+}
+
 .inTime {
     background-color: var(--inTime);
 }
@@ -53,7 +57,7 @@
     border-radius: 5px;
     visibility: hidden;
     position: absolute;
-    z-index: 1;
+    z-index: 0;
     text-align: center;
     width: 110px;
     margin-left: -55px;

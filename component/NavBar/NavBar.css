@@ -9,20 +9,17 @@
 .select-proyect,
 .options-items,
 .login-button {
-    width: 20%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     color: white;
 }
 
-.login-button{
-    display: flex;
-    justify-content: end;
-    width: 100%;
+.login-button {
+    display: none;
 }
 
-.login-button>button{
+.login-button>button {
     margin: 0px;
     padding: 0px;
     width: 50px;
@@ -70,4 +67,29 @@
 
 .disable {
     background-color: none;
+}
+
+/* Breakpoints */
+@media (min-width: 576px) {
+    /* Pequeñas pantallas (ej. celulares grandes) */
+
+}
+
+@media (min-width: 768px) {
+    /* Tablets */
+
+}
+
+@media (min-width: 992px) {
+
+    /* Laptops y pantallas medianas */
+    .login-button {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Pantallas grandes */
 }
