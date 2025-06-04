@@ -42,7 +42,9 @@ export const LoginForm = () => {
     }
 
     const closeModal = () => {
-        setOpenModal(false);
+        setTimeout(() => {
+            setOpenModal(false);
+        }, 1000);
     }
 
     return (

@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./dbFirebase";
-import { getFirestore, collection, doc, setDoc, getDocs, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDocs, updateDoc, addDoc, deleteDoc, query, where } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -14,8 +14,8 @@ export const db = getFirestore(app)
 export const auth = getAuth(app)
 
 //iniciar secion
-export const logInUser = async(email, password)=>{
-    try {        
+export const logInUser = async (email, password) => {
+    try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password)
         return 'ok'
     } catch (error) {
@@ -23,7 +23,7 @@ export const logInUser = async(email, password)=>{
     }
 }
 
-export const logOutUser = async()=>{
+export const logOutUser = async () => {
     try {
         await signOut(auth)
         return 'out'
@@ -38,6 +38,15 @@ export const getAllData = async (proyecto) => {
     const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return data
 }
+
+export const getFilterDatas = async (tb, param, value) => {
+    const refTb = collection(db, tb)
+    const q = query(refTb, where(param, "==", value))
+    const querySnapshot = await getDocs(q)
+    const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+    return data
+}
+
 
 /*CUD itemActions - R hay un metodo unico*/
 export const editItemActionState = async (idDoc, status) => {
@@ -64,10 +73,10 @@ export const addItemAction = async (obj) => {
 
 export const deleteItemAction = async (id) => {
     try {
-    await deleteDoc(doc(db, 'itemAction', id))
-    return 'ok'        
+        await deleteDoc(doc(db, 'itemAction', id))
+        return 'ok'
     } catch (error) {
-        return(error.message)
+        return (error.message)
     }
 
 }
@@ -99,15 +108,31 @@ export const deleteItem = async (id) => {
 }
 
 /*CUD Proyectos - R es general*/
-export const addProyecto = async(obj) => {
+export const addProyecto = async (obj) => {
     const docRef = collection(db, 'Proyectos')
     const res = await addDoc(docRef, obj)
     return res
 }
 
-export const deleteProyecto = async(id) => {
+export const deleteProyecto = async (id) => {
     try {
         await deleteDoc(doc(db, 'Proyectos', id))
+        return 'ok'
+    } catch (error) {
+        return (error.message)
+    }
+}
+
+/*CUD Proyectos - R es general*/
+export const addNote = async (obj) => {
+    const docRef = collection(db, 'Notes')
+    const res = await addDoc(docRef, obj)
+    return res
+}
+
+export const deleteNote = async (id) => {
+    try {
+        await deleteDoc(doc(db, 'Notes', id))
         return 'ok'
     } catch (error) {
         return (error.message)

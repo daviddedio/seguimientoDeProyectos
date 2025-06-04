@@ -1,13 +1,14 @@
 import './DragBody.css'
 import { Column } from '../Column/Column'
 import { ActionCard } from '../ActionCard/ActionCard'
-import { getAllData } from '../../FireBase/conexion'
+import { getAllData, getFilterDatas } from '../../FireBase/conexion'
 import { useEffect, useState } from 'react'
 import { useGlobalContext } from '../../context/Context'
 import { CreateUpdateForm } from '../../Formularios/CreateUpdateForm/CreateUpdateForm'
 import { GestionProyectos } from '../../Formularios/GestionProyectos/GestionProyectos'
 import { NavBar } from '../NavBar/NavBar'
 import { ComponenteCarga } from '../ComponenteCarga/ComponenteCarga'
+import { NoteComponent } from '../NoteComponent/NoteComponent'
 
 /*Estados > To do - En curso - Finalizado */
 
@@ -27,13 +28,33 @@ export const DragBody = () => {
     const [opcionDato, setOpcionDato] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [title, setTitle] = useState('')
+    const [btnActive, setBtnActive] = useState(true)
+    const [note, setNote] = useState([])
 
-    const getData = async (filtros) => {
+    const getData = async (tb, param, filtros) => {
+        console.log(filtros)
         setLoading(true)
         try {
-            const datos = await getAllData('itemAction')
-            setData(datos.filter(e => e.proyecto === filtros))
+            const datos = await getFilterDatas(tb, param, filtros)
+            //'itemAction', 'proyecto', filtros
+            setData(datos)
         } catch (error) {
+            console.log(error)
+            setError(error.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+        const getNote = async (tb, param, filtros) => {
+        setLoading(true)
+        try {
+            const datos = await getFilterDatas(tb, param, filtros)
+            //'itemAction', 'proyecto', filtros
+            console.log(datos)
+            setNote(datos)
+        } catch (error) {
+            console.log(error)
             setError(error.message)
         } finally {
             setLoading(false)
@@ -43,11 +64,13 @@ export const DragBody = () => {
     const setProyect = async () => {
         try {
             const datos = await getAllData('Proyectos')
-            console.log(datos)
             setOptionProyecto(datos)
-            getData(datos[0].nombre)
+            //esto va al membrete
+            await getData('itemAction', 'proyecto',datos[0].nombre)
+            await getNote('Notes', 'proyecto', datos[0].nombre)
             setDescripcion(datos[0].descripcion)
             setOpcionDato(datos[0].nombre)
+            //efectos
             efectoTitulo()
         } catch (error) {
             setError(error.message)
@@ -58,16 +81,22 @@ export const DragBody = () => {
         setTitle('')
         const { value } = e.target
         const jsonParse = JSON.parse(value)
+        console.log(jsonParse.nombre)
         efectoTitulo()
         setDescripcion(jsonParse.descr)
         setOpcionDato(jsonParse.nombre)
-        await getData(jsonParse.nombre)
+        await getData('itemAction', 'proyecto',jsonParse.nombre)
+        await getNote('Notes', 'proyecto', jsonParse.nombre)
     }
 
     const efectoTitulo = () => {
         setTimeout(() => {
             setTitle('visible-title')
         }, 500);
+    }
+
+    const setActiveBtn = (arg1) => {
+        setBtnActive(arg1)
     }
 
     useEffect(() => {
@@ -77,7 +106,7 @@ export const DragBody = () => {
 
     return (
         <div className='general-conteiner'>
-            <NavBar funcionAddItem={() => { mostrarModal(<CreateUpdateForm accion={"Nuevo"} Titulo={""} Descripcion={""} Plazo={""} Proyecto={""} Estado={""} Items={""} Id={""} funcion={[setReload, reload]} />) }} functionReviewProyect={() => { mostrarModal(<GestionProyectos funcion={[setReload, reload]} />) }} >
+            <NavBar funcionAddItem={() => { mostrarModal(<CreateUpdateForm accion={"Nuevo"} Titulo={""} Descripcion={""} Plazo={""} Proyecto={""} Estado={""} Items={""} Id={""} funcion={[setReload, reload]} />) }} functionReviewProyect={() => { mostrarModal(<GestionProyectos funcion={[setReload, reload]} />) }} optionsProyects={opcionProyecto}>
                 <select name="proyectos" id="proyectos" onChange={actualizarItemsActions}>
                     {
                         opcionProyecto && opcionProyecto.map((e, i) => <option key={i} value={JSON.stringify({ nombre: e.nombre, descr: e.descripcion })}>{e.nombre}</option>)
@@ -90,19 +119,35 @@ export const DragBody = () => {
                     {descripcion && descripcion}
                 </h3>
             </div>
-            <div className="drag-n-drop">
-                <Column nombreColumn={"Para hacer"} id={1} datos={data} funcion={setData}>
-                    {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Para hacer" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                </Column>
-
-                <Column nombreColumn={"En proceso"} id={2} datos={data} funcion={setData}>
-                    {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "En proceso" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                </Column>
-
-                <Column nombreColumn={"Finalizados"} id={3} datos={data} funcion={setData}>
-                    {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Finalizados" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                </Column>
+            <div className="option-note-conteiner">
+                <ul>
+                    <li onClick={() => setActiveBtn(true)} className={btnActive ? 'btn-active' : ''}>Estado</li>
+                    <li onClick={() => setActiveBtn(false)} className={!btnActive ? 'btn-active' : ''}>Notas</li>
+                </ul>
             </div>
+
+            {
+                btnActive
+                ?
+                <div className="drag-n-drop">
+                    <Column nombreColumn={"Para hacer"} id={1} datos={data} funcion={setData}>
+                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Para hacer" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                    </Column>
+
+                    <Column nombreColumn={"En proceso"} id={2} datos={data} funcion={setData}>
+                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "En proceso" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                    </Column>
+
+                    <Column nombreColumn={"Finalizados"} id={3} datos={data} funcion={setData}>
+                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Finalizados" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                    </Column>
+                </div>
+                :
+                <div className="note-conteiner">
+                    {loading ? <ComponenteCarga/> : note.map((e,i)=><NoteComponent key={i}  proyecto={e.proyecto} nota={e.nota} adjunto={e.adjunto} />)}
+                </div>
+            }
+
         </div>
     )
 }

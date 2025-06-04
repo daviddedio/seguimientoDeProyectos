@@ -1,0 +1,9 @@
+.form-create-note{
+    width: 100%;
+}
+
+.notas-creadas-conteiner{
+    height: 150px;
+    width: 100%;
+    overflow-y: scroll;
+}

@@ -1,3 +1,7 @@
+:root {
+    --inHeigth: 750px
+}
+
 .general-conteiner {
     background-color: #F7F7F7;
     height: auto;
@@ -8,6 +12,21 @@
     gap: 20px;
     justify-content: start;
     overflow: scroll;
+    height: var(--inHeigth);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.note-conteiner{
+    display: flex;
+    justify-content: start;
+    height: var(--inHeigth);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    overflow-y: scroll;
+    flex-direction: column;
 }
 
 #proyectos {
@@ -38,6 +57,39 @@
 
 .visible-title {
     opacity: 1;
+}
+
+.option-note-conteiner{
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: end;
+}
+
+.option-note-conteiner>ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0px;
+}
+
+.option-note-conteiner>ul>li{
+    padding: 5px 5px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    cursor:pointer;
+    background-color: grey;
+    color: white;
+}
+
+.btn-active{
+    background-color:  #F7F7F7 !important;
+    color: black !important;
 }
 
 /* Breakpoints */

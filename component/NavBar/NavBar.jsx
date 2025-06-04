@@ -2,8 +2,9 @@ import './NavBar.css'
 import { useGlobalContext } from '../../context/Context'
 import { LoginForm } from '../../Formularios/LoginForm/LoginForm'
 import { LogOutComponent } from '../../Formularios/LogOutComponent/LogOutComponent'
+import { CreateNote } from '../../Formularios/CreateNote/CreateNote'
 
-export const NavBar = ({ children, funcionAddItem, functionReviewProyect}) => {
+export const NavBar = ({ children, funcionAddItem, functionReviewProyect, optionsProyects}) => {
 
     const { setOpenModal, setComponente, login } = useGlobalContext()
 
@@ -25,12 +26,18 @@ export const NavBar = ({ children, funcionAddItem, functionReviewProyect}) => {
         setOpenModal(true)
     }
 
+    const addNote =()=>{
+        setComponente(<CreateNote opciones={optionsProyects}  />)
+        setOpenModal(true)
+    }
+
     return (
         <div className='navbar'>
             { login && <div className="options-items">
                 <ul>
-                    <li onClick={()=>addItem()}>Item de accion</li>
-                    <li onClick={()=>proyectManager()}>Proyecto</li>
+                    <li onClick={()=>proyectManager()}>Crear Proyecto</li>
+                    <li onClick={()=>addItem()}>Crear Item de accion</li>
+                    <li onClick={()=>addNote()}>Crear Nota</li>
                 </ul>
             </div>}
             <div className="select-proyect">
