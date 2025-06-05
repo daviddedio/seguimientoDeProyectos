@@ -29,10 +29,6 @@ select {
     border-bottom: 2px solid black;
 }
 
-input[type="checkbox"] {
-    transform: scale(1.5);
-}
-
 input[type="checkbox"]:disabled:checked::before {
     content:'✔';
     color: green;

@@ -1,8 +1,10 @@
 .overlay{
     position: fixed;
-    left: 50%;
+    top: 0%;
+    left: 0%;
+    /* left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
     width: 100%;
     height: 100%;
     border: 1px solid black;
@@ -22,6 +24,11 @@
     border-radius: 25px;
     border: 1px solid black;
     z-index: 2;
+    font-size: 12px;
+}
+
+input[type="checkbox"] {
+    transform: scale(1);
 }
 
 .upline{
@@ -47,8 +54,12 @@
 
 @media (min-width: 992px) { /* Laptops y pantallas medianas */
 .modalx{width: 70%;}
+    input[type="checkbox"] {transform: scale(1);}
+    .modalx{font-size: 9px;}
 }
 
 @media (min-width: 1200px) { /* Pantallas grandes */
-    .modalx{width: 50%;}
+    .modalx{width: 90%;}
+    input[type="checkbox"] {transform: scale(1.5);}
+    .modalx{font-size: 12px;}
 }

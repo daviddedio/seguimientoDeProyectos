@@ -21,16 +21,16 @@ export const CreateNote = ({ opciones }) => {
         }
     }
 
-    const addNewNote = async(e)=>{
+    const addNewNote = async (e) => {
         e.preventDefault()
+        const titulo = e.target.elements.titulo.value
         const nota = e.target.elements.nota.value
         const adjunto = e.target.elements.adjunto.value
         const proyecto = e.target.elements.proyecto.value
-        const obj = {"nota":nota, "adjunto":adjunto, "proyecto":proyecto}
+        const obj = { "titulo":titulo, "nota": nota, "adjunto": adjunto, "proyecto": proyecto }
 
         const res = await addNote(obj)
-        if (res){buscarNotas('',proyecto)}
-
+        if (res) { buscarNotas('', proyecto) }
     }
 
 
@@ -39,10 +39,8 @@ export const CreateNote = ({ opciones }) => {
             <h1>Gestionar notas</h1>
             <form action='' onSubmit={(e) => addNewNote(e)} className='form-create-note'>
                 <div className="inputPack">
-                    <label htmlFor="proyecto">Proyecto</label>
-                    <select name="proyecto" id="proyecto" onChange={(e) => { buscarNotas(e,'') }}>
-                        {opciones.map((e, i) => <option key={i} value={e.nombre}>{e.nombre}</option>)}
-                    </select>
+                    <label htmlFor="titulo">Titulo</label>
+                    <input type="text" name="titulo" id="titulo" />
                 </div>
                 <div className="inputPack">
                     <label htmlFor="nota">Nota</label>
@@ -50,14 +48,20 @@ export const CreateNote = ({ opciones }) => {
                 </div>
                 <div className="inputPack">
                     <label htmlFor="adjunto">Adjunto</label>
-                    <input type="text" name="adjunto" id="adjunto" placeholder='subir los archivos manualmente'/>
+                    <input type="text" name="adjunto" id="adjunto" placeholder='subir los archivos manualmente' />
+                </div>
+                <div className="inputPack">
+                    <label htmlFor="proyecto">Proyecto</label>
+                    <select name="proyecto" id="proyecto" onChange={(e) => { buscarNotas(e, '') }}>
+                        {opciones.map((e, i) => <option key={i} value={e.nombre}>{e.nombre}</option>)}
+                    </select>
                 </div>
                 <button type="submit">Agregar</button>
             </form>
             <hr />
             <div className="notas-creadas-conteiner">
                 <ul>
-                    {data && data.map((e, i) => <li key={i}>{e.nota}</li>)}
+                    {data && data.map((e, i) => <li key={i}>{e.titulo}</li>)}
                 </ul>
             </div>
 

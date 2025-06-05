@@ -12,23 +12,32 @@
     justify-content: space-between;
     height: 150px;
     max-height: 350px;
+    max-height: 350px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+.visible-coment{
+    opacity: 1;
 }
 
 .title-note-card {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0px;
-
 }
 
 .note-card-title {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     background-color: gainsboro;
 }
 
 .note-card>p{
     margin: 0px;
+}
+
+.body-note-card{
+    overflow-y: scroll;
 }

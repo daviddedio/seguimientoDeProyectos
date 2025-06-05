@@ -32,7 +32,6 @@ export const DragBody = () => {
     const [note, setNote] = useState([])
 
     const getData = async (tb, param, filtros) => {
-        console.log(filtros)
         setLoading(true)
         try {
             const datos = await getFilterDatas(tb, param, filtros)
@@ -51,7 +50,6 @@ export const DragBody = () => {
         try {
             const datos = await getFilterDatas(tb, param, filtros)
             //'itemAction', 'proyecto', filtros
-            console.log(datos)
             setNote(datos)
         } catch (error) {
             console.log(error)
@@ -81,7 +79,6 @@ export const DragBody = () => {
         setTitle('')
         const { value } = e.target
         const jsonParse = JSON.parse(value)
-        console.log(jsonParse.nombre)
         efectoTitulo()
         setDescripcion(jsonParse.descr)
         setOpcionDato(jsonParse.nombre)
@@ -144,7 +141,7 @@ export const DragBody = () => {
                 </div>
                 :
                 <div className="note-conteiner">
-                    {loading ? <ComponenteCarga/> : note.map((e,i)=><NoteComponent key={i}  proyecto={e.proyecto} nota={e.nota} adjunto={e.adjunto} />)}
+                    {loading ? <ComponenteCarga/> : note.map((e,i)=><NoteComponent key={i}  proyecto={e.proyecto} nota={e.nota} adjunto={e.adjunto} titulo={e.titulo}/>)}
                 </div>
             }
 
