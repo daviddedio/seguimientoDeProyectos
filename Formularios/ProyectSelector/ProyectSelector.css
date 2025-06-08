@@ -1,0 +1,60 @@
+.accordion-general-conteiner{
+    margin: 15px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    height: auto;
+}
+
+.accordion-proyect {
+    width: 100%;
+    overflow-y: scroll;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.label-proyect {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    color: white;
+    background-color: #1E4053;
+}
+
+.accordion:last-child>.label-proyect,
+.accordion:last-child>.accordion-content {
+    border: none;
+}
+
+.accordion-content {
+    border-bottom: 1px solid black;
+    padding: 0px 15px;
+    opacity: 0;
+    max-height: 0;
+    overflow-y: scroll;
+    z-index: -1;
+    transition: 0.3s linear;
+}
+
+input:checked~.accordion-content {
+    display: block;
+    opacity: 1;
+    max-height: 500px;
+    z-index: 1;
+}
+
+.accordion-content>ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.accordion-content>ul>li {
+    cursor: pointer;
+}
+
+.accordion-content>ul>li:hover {
+    background-color: #87CEEB;
+}

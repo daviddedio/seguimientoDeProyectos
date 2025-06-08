@@ -6,22 +6,31 @@ import { UseForm } from '../UseForm'
 
 
 export const GestionProyectos = ({ funcion }) => {
-    const template = { nombre: '', descripcion: '' }
+    const template = { nombre: '', descripcion: '', tipo: '' }
     const { formState, onInputTextChange, setFormState } = UseForm(template)
-    const { nombre, descripcion } = formState
+    const { nombre, descripcion, tipo } = formState
 
     const [loading, setLoading] = useState(false)
+    const [loadingTipos, setLoadingTipos] = useState(false)
     const [data, setData] = useState([])
+    const [tipoData, setTipoData] = useState([])
+
+    //     const proy = await getAllData('TipoProyecto')
+    // setTipo(proy)
 
     const getProyects = async () => {
         setLoading(true)
+        setLoadingTipos(true)
         try {
             const res = await getAllData('Proyectos')
             setData(res)
+            const tipos = await getAllData('TipoProyecto')
+            setTipoData(tipos)
         } catch (error) {
 
         } finally {
             setLoading(false)
+            setLoadingTipos(false)
         }
     }
 
@@ -44,7 +53,7 @@ export const GestionProyectos = ({ funcion }) => {
         await addProyecto(formState)
         getProyects()
         setLoading(false)
-        setFormState({ ...formState, ['nombre']: '', ['descripcion']: '' })
+        setFormState({ ...formState, ['nombre']: '', ['descripcion']: '', ['tipo']: '' })
         funcion[0](!funcion[1])
     }
 
@@ -64,6 +73,16 @@ export const GestionProyectos = ({ funcion }) => {
                         <div className="inputPack">
                             <label htmlFor="descripcion">Descripcion</label>
                             <textarea rows={3} name="descripcion" id="descripcion" onChange={onInputTextChange} value={descripcion} />
+                        </div>
+                        <div className="inputPack">
+                            <label htmlFor="tipo">tipo de proyecto</label>
+                            <select name="tipo" id="tipo" onChange={onInputTextChange} value={tipo}>
+                                {
+                                    loadingTipos
+                                        ? <option>Cargando...</option>
+                                        : tipoData.map((e, i) => <option key={i} value={e.tipo}>{e.tipo}</option>)
+                                }
+                            </select>
                         </div>
                         <button type="submit">{loading ? <i className="fa-solid fa-spinner fa-spin"></i> : "Agregar"}</button>
                     </form>

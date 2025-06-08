@@ -30,6 +30,7 @@ export const DragBody = () => {
     const [title, setTitle] = useState('')
     const [btnActive, setBtnActive] = useState(true)
     const [note, setNote] = useState([])
+    const [tipo, setTipo] = useState([])
 
     const getData = async (tb, param, filtros) => {
         setLoading(true)
@@ -45,7 +46,7 @@ export const DragBody = () => {
         }
     }
 
-        const getNote = async (tb, param, filtros) => {
+    const getNote = async (tb, param, filtros) => {
         setLoading(true)
         try {
             const datos = await getFilterDatas(tb, param, filtros)
@@ -64,7 +65,7 @@ export const DragBody = () => {
             const datos = await getAllData('Proyectos')
             setOptionProyecto(datos)
             //esto va al membrete
-            await getData('itemAction', 'proyecto',datos[0].nombre)
+            await getData('itemAction', 'proyecto', datos[0].nombre)
             await getNote('Notes', 'proyecto', datos[0].nombre)
             setDescripcion(datos[0].descripcion)
             setOpcionDato(datos[0].nombre)
@@ -77,13 +78,13 @@ export const DragBody = () => {
 
     const actualizarItemsActions = async (e) => {
         setTitle('')
-        const { value } = e.target
-        const jsonParse = JSON.parse(value)
+        // const { value } = e.target
+        // const jsonParse = JSON.parse(value)
         efectoTitulo()
-        setDescripcion(jsonParse.descr)
-        setOpcionDato(jsonParse.nombre)
-        await getData('itemAction', 'proyecto',jsonParse.nombre)
-        await getNote('Notes', 'proyecto', jsonParse.nombre)
+        setDescripcion(e.descripcion)
+        setOpcionDato(e.nombre)
+        await getData('itemAction', 'proyecto', e.nombre)
+        await getNote('Notes', 'proyecto', e.nombre)
     }
 
     const efectoTitulo = () => {
@@ -103,12 +104,20 @@ export const DragBody = () => {
 
     return (
         <div className='general-conteiner'>
-            <NavBar funcionAddItem={() => { mostrarModal(<CreateUpdateForm accion={"Nuevo"} Titulo={""} Descripcion={""} Plazo={""} Proyecto={""} Estado={""} Items={""} Id={""} funcion={[setReload, reload]} />) }} functionReviewProyect={() => { mostrarModal(<GestionProyectos funcion={[setReload, reload]} />) }} optionsProyects={opcionProyecto}>
-                <select name="proyectos" id="proyectos" onChange={actualizarItemsActions}>
+            <NavBar
+                funcionAddItem={() => { mostrarModal(<CreateUpdateForm accion={"Nuevo"} Titulo={""} Descripcion={""} Plazo={""} Proyecto={""} Estado={""} Items={""} Id={""} />) }}
+
+                functionReviewProyect={() => { mostrarModal(<GestionProyectos funcion={[setReload, reload]} />) }}
+                
+                actualizarItems={actualizarItemsActions}
+
+                optionsProyects={opcionProyecto} 
+                >
+                {/* <select name="proyectos" id="proyectos" onChange={actualizarItemsActions}>
                     {
                         opcionProyecto && opcionProyecto.map((e, i) => <option key={i} value={JSON.stringify({ nombre: e.nombre, descr: e.descripcion })}>{e.nombre}</option>)
                     }
-                </select>
+                </select> */}
             </NavBar>
             <div className={`descripcion-proyecto ${title}`}>
                 <h2>{opcionDato}</h2>
@@ -125,24 +134,24 @@ export const DragBody = () => {
 
             {
                 btnActive
-                ?
-                <div className="drag-n-drop">
-                    <Column nombreColumn={"Para hacer"} id={1} datos={data} funcion={setData}>
-                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Para hacer" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                    </Column>
+                    ?
+                    <div className="drag-n-drop">
+                        <Column nombreColumn={"Para hacer"} id={1} datos={data} funcion={setData}>
+                            {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Para hacer" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                        </Column>
 
-                    <Column nombreColumn={"En proceso"} id={2} datos={data} funcion={setData}>
-                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "En proceso" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                    </Column>
+                        <Column nombreColumn={"En proceso"} id={2} datos={data} funcion={setData}>
+                            {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "En proceso" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                        </Column>
 
-                    <Column nombreColumn={"Finalizados"} id={3} datos={data} funcion={setData}>
-                        {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Finalizados" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
-                    </Column>
-                </div>
-                :
-                <div className="note-conteiner">
-                    {loading ? <ComponenteCarga/> : note.map((e,i)=><NoteComponent key={i}  proyecto={e.proyecto} nota={e.nota} adjunto={e.adjunto} titulo={e.titulo}/>)}
-                </div>
+                        <Column nombreColumn={"Finalizados"} id={3} datos={data} funcion={setData}>
+                            {loading ? <ComponenteCarga /> : data.map((e, i) => e.estado == "Finalizados" && <ActionCard key={i} id={e.id} titulo={e.titulo} descripcion={e.descripcion} plazo={e.plazo} proyecto={e.proyecto} estado={e.estado} items={e.items} funcion={[setReload, reload]} />)}
+                        </Column>
+                    </div>
+                    :
+                    <div className="note-conteiner">
+                        {loading ? <ComponenteCarga /> : note.map((e, i) => <NoteComponent key={i} proyecto={e.proyecto} nota={e.nota} adjunto={e.adjunto} titulo={e.titulo} />)}
+                    </div>
             }
 
         </div>

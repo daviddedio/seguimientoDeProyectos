@@ -26,6 +26,9 @@
     border: none;
     border-radius: 10px;
     margin-right: 5px;
+    background-color: #333333;
+    color: white;
+
 }
 
 .select-proyect {
@@ -51,6 +54,7 @@
     border-radius: 25px;
     color: white;
     text-align: center;
+    border: 1px solid white;
 }
 
 .options-items>ul>li:hover {

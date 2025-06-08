@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { getAllData, updateItemAction, addItemAction } from '../../FireBase/conexion'
 import { useGlobalContext } from '../../context/Context'
 
-export const CreateUpdateForm = ({ accion, Id, Titulo, Descripcion, Plazo, Proyecto, Estado, funcion }) => {
+export const CreateUpdateForm = ({ accion, Id, Titulo, Descripcion, Plazo, Proyecto, Estado }) => {
     const { setOpenModal, updateCards } = useGlobalContext()
 
     const template = {

@@ -138,3 +138,19 @@ export const deleteNote = async (id) => {
         return (error.message)
     }
 }
+
+//Tipos de proyectos
+export const addTipoProyecto = async(obj)=>{
+    const docRef = collection(db, 'TipoProyecto')
+    const res = await addDoc(docRef, obj)
+    return res
+}
+
+export const deleteTipoProyecto = async(id) =>{
+    try {
+        await deleteDoc(doc(db, 'TipoProyecto', id))
+        return 'ok'
+    } catch (error) {
+        return (error.message)
+    }
+}

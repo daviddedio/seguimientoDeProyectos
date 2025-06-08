@@ -48,6 +48,11 @@ button {
     margin-top: 10px;
 }
 
+.icons{
+    margin: 10px;
+    font-size: 18px;
+}
+
 /* TEMPLATE */
 /* Breakpoints */
 @media (min-width: 576px) { /* Pequeñas pantallas (ej. celulares grandes) */

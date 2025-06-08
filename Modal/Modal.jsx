@@ -1,7 +1,7 @@
 import './Modal.css'
 import { useGlobalContext } from '../context/Context'
 import { createPortal } from 'react-dom'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const Modal = () => {
     const modalRoot = document.getElementById("modal")
@@ -12,7 +12,7 @@ export const Modal = () => {
 
     return createPortal(
         <div className="overlay">
-            <div className="modalx" ref={modalRef}>
+            <div className='modalx' ref={modalRef}>
                 <div className="upline" onClick={closeModal}> click aqui para cerrar</div>
                 <div className="modalComponent">
                     {componente}
