@@ -1,6 +1,9 @@
 .footer-conteiner {
     height: 100px;
-    background-color: #1E4053;
+    background-image: url("/public/headerBackground.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 10px;
     color: white;
     size: 20px;

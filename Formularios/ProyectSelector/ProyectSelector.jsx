@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { getAllData } from '../../FireBase/conexion'
 import { ComponenteCarga } from '../../component/ComponenteCarga/ComponenteCarga'
 
-export const ProyectSelector = ({ proyectos, funcion }) => {
+export const ProyectSelector = ({ proyectos, funcion, closeModal }) => {
 
     const { setOpenModal, setComponente, login } = useGlobalContext()
 
@@ -12,7 +12,7 @@ export const ProyectSelector = ({ proyectos, funcion }) => {
 
     const selectAndClose = (e) => {
         funcion(e)
-        setOpenModal(false)
+        closeModal()
     }
 
     const getTiposProyecto = async () => {
@@ -23,7 +23,7 @@ export const ProyectSelector = ({ proyectos, funcion }) => {
     useEffect(() => { getTiposProyecto() }, [])
 
     return (
-        <div className='accordion-general-conteiner'>
+        <div className="accordion-general-conteiner">
             <h2> {tipo
                 ? 'Seleccionar categoria y proyecto'
                 : <ComponenteCarga />}
@@ -32,7 +32,7 @@ export const ProyectSelector = ({ proyectos, funcion }) => {
                 {
                     tipo &&
                     tipo.map((e, i) =>
-                        <div className="accordion" key={i}>
+                        <div className='accordion'  key={i}>
                             <input type="radio" name="accordion" id={`accordion${i}`} />
                             <label htmlFor={`accordion${i}`} className="label-proyect">{e.tipo}</label>
                             <div className="accordion-content">

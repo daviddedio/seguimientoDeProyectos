@@ -128,7 +128,7 @@ export const DragBody = () => {
             <div className="option-note-conteiner">
                 <ul>
                     <li onClick={() => setActiveBtn(true)} className={btnActive ? 'btn-active' : ''}>Estado</li>
-                    <li onClick={() => setActiveBtn(false)} className={!btnActive ? 'btn-active' : ''}>Notas</li>
+                    <li onClick={() => setActiveBtn(false)} className={!btnActive ? 'btn-active' : ''}>Notas <span>{note && note.length}</span></li>
                 </ul>
             </div>
 

@@ -16,13 +16,12 @@
     max-height: 200px;
     height: 125px;
     opacity: 0;
-    transition: opacity 0.2s linear;
+    /* transition: opacity 0.2s linear; */
 }
 
-.vis{
+/* .vis{
     opacity: 1;
-}
-
+} */
 
 .card-header {
     padding: 5px;

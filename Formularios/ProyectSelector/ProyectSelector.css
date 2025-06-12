@@ -1,5 +1,5 @@
 .accordion-general-conteiner{
-    margin: 15px 10px;
+    margin: 15px 10px;  
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
@@ -29,6 +29,7 @@ input[type="radio"] {
 }
 
 .accordion-content {
+    overflow: hidden;
     border-bottom: 1px solid black;
     padding: 0px 15px;
     opacity: 0;

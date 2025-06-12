@@ -1,4 +1,4 @@
-.overlay{
+.overlay {
     position: fixed;
     top: 0%;
     left: 0%;
@@ -16,7 +16,8 @@
     padding: 16px;
     backdrop-filter: blur(5px);
 }
-.modalx{
+
+.modalx {
     width: 100%;
     height: auto;
     background-color: white;
@@ -25,13 +26,29 @@
     border: 1px solid black;
     z-index: 2;
     font-size: 12px;
+    max-height: 500px;
+    transition: max-height 0.5 ease-in-out;
+}
+
+.no-vis-modal {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.vis-modal {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 input[type="checkbox"] {
     transform: scale(1);
 }
 
-.upline{
+.upline {
     display: flex;
     justify-content: center;
     background-color: gray;
@@ -40,26 +57,48 @@ input[type="checkbox"] {
     height: 25px;
 }
 
-.modalComponent{
+.modalComponent {
     padding: 10px;
 }
 
 /* Breakpoints */
-@media (min-width: 576px) { /* Pequeñas pantallas (ej. celulares grandes) */
+@media (min-width: 576px) {
+    /* Pequeñas pantallas (ej. celulares grandes) */
 
 }
 
-@media (min-width: 768px) { /* Tablets */
+@media (min-width: 768px) {
+    /* Tablets */
 }
 
-@media (min-width: 992px) { /* Laptops y pantallas medianas */
-.modalx{width: 70%;}
-    input[type="checkbox"] {transform: scale(1);}
-    .modalx{font-size: 9px;}
+@media (min-width: 992px) {
+
+    /* Laptops y pantallas medianas */
+    .modalx {
+        width: 70%;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1);
+    }
+
+    .modalx {
+        font-size: 9px;
+    }
 }
 
-@media (min-width: 1200px) { /* Pantallas grandes */
-    .modalx{width: 90%;}
-    input[type="checkbox"] {transform: scale(1.5);}
-    .modalx{font-size: 12px;}
+@media (min-width: 1200px) {
+
+    /* Pantallas grandes */
+    .modalx {
+        width: 90%;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.5);
+    }
+
+    .modalx {
+        font-size: 12px;
+    }
 }

@@ -28,7 +28,7 @@ export const ActionCard = ({ id, titulo, descripcion, plazo, proyecto, estado, i
     }
 
     const [vigencia, setVigencia] = useState(calculosVigencia())
-    const [opac, setOpac] = useState('')
+    const [opac, setOpac] = useState(0)
 
     const getItemsForActions = async () => {
         try {
@@ -46,12 +46,13 @@ export const ActionCard = ({ id, titulo, descripcion, plazo, proyecto, estado, i
 
     useEffect(() => {
         getItemsForActions()
-        setTimeout(() => {setOpac('vis')}, 100);   
+        setTimeout(() => {setOpac(1)}, 100);   
     }, [])
 
     //card-header inTime Late
     return (
-        <div className={`card ${opac}`} draggable onDragStart={e => startDrag(e, id, estado)}>
+        <div className={`card`} draggable onDragStart={e => startDrag(e, id, estado)}
+        style={{ opacity: `${opac}`, transition: 'opacity 0.2s ease-in-out' }}>
             <div className={`card-header ${vigencia}`}>
                 { login && <i className="fa-solid fa-pen-to-square toolTipConteiner"
                     onClick={() => mostrarModal(<CreateUpdateForm accion={"Editar"} Titulo={titulo} Descripcion={descripcion} Plazo={plazo} Proyecto={proyecto} Estado={estado} Items={items} Id={id} funcion={funcion} />)}>
