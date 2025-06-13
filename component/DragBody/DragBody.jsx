@@ -131,9 +131,9 @@ export const DragBody = () => {
                     <li onClick={() => setActiveBtn(false)} className={!btnActive ? 'btn-active' : ''}>Notas <span>{note && note.length}</span></li>
                 </ul>
             </div>
-            <div className="flechas">
-                <i className="fa-solid fa-arrows-left-right-to-line"/><span>Mover para ver estado de las acciones</span>
-            </div>
+            {btnActive && <div className="flechas">
+                <i className="fa-solid fa-arrows-left-right-to-line"/><span>Mover las columnas para ver los estados</span>
+            </div>}
             {
                 btnActive
                     ?
