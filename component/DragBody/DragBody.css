@@ -18,7 +18,7 @@
     border-bottom: 1px solid black;
 }
 
-.note-conteiner{
+.note-conteiner {
     display: flex;
     justify-content: start;
     height: var(--inHeigth);
@@ -59,21 +59,21 @@
     opacity: 1;
 }
 
-.option-note-conteiner{
+.option-note-conteiner {
     border-bottom: 1px solid black;
     margin-bottom: 10px;
     display: flex;
     align-items: end;
 }
 
-.option-note-conteiner>ul{
+.option-note-conteiner>ul {
     display: flex;
     flex-direction: row;
     list-style-type: none;
     margin: 0px;
 }
 
-.option-note-conteiner>ul>li{
+.option-note-conteiner>ul>li {
     padding: 5px 5px;
     border-top: 1px solid black;
     border-left: 1px solid black;
@@ -82,7 +82,7 @@
     width: 100px;
     text-align: center;
     border-radius: 10px 10px 0px 0px;
-    cursor:pointer;
+    cursor: pointer;
     background-color: grey;
     color: white;
     display: flex;
@@ -90,17 +90,51 @@
     align-items: center;
 }
 
-.btn-active{
-    background-color:  #F7F7F7 !important;
+.btn-active {
+    background-color: #F7F7F7 !important;
     color: black !important;
 }
-.option-note-conteiner>ul>li>span{
+
+.option-note-conteiner>ul>li>span {
     display: inline-block;
     flex-direction: row;
     border-radius: 50%;
     background-color: red;
     width: 20px;
     height: 20px;
+}
+
+.flechas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    height: 70px;
+}
+
+.flechas>i {
+    font-size: 40px;
+    margin: 0px 10px;
+    animation: shakeIcon 5s infinite;
+}
+
+.flechas>span::after{
+    content:' :.';
+}
+
+.flechas>span::before{
+    content:'.: ';
+}
+
+@keyframes shakeIcon {
+    0% { transform: translate(2px, 0px);}
+    1% { transform: translate(-4px, 0px);}
+    2% { transform: translate(2px, 0px);}
+    3% { transform: translate(-2px, 0px);}
+    4% { transform: translate(2px, 0px);}
+    5% { transform: translate(-4px, 0px);}
+    6% { transform: translate(0px, 0px);}
 }
 
 /* Breakpoints */
@@ -119,7 +153,6 @@
     .descripcion-proyecto {
         font-size: 20px;
     }
-
 }
 
 @media (min-width: 1250px) {
@@ -129,5 +162,10 @@
         display: flex;
         gap: 20px;
         justify-content: center;
+    }
+
+    .flechas {
+        visibility: hidden;
+        height: 0px;
     }
 }

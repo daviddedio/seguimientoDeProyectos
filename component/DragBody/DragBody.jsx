@@ -108,11 +108,11 @@ export const DragBody = () => {
                 funcionAddItem={() => { mostrarModal(<CreateUpdateForm accion={"Nuevo"} Titulo={""} Descripcion={""} Plazo={""} Proyecto={""} Estado={""} Items={""} Id={""} />) }}
 
                 functionReviewProyect={() => { mostrarModal(<GestionProyectos funcion={[setReload, reload]} />) }}
-                
+
                 actualizarItems={actualizarItemsActions}
 
-                optionsProyects={opcionProyecto} 
-                >
+                optionsProyects={opcionProyecto}
+            >
                 {/* <select name="proyectos" id="proyectos" onChange={actualizarItemsActions}>
                     {
                         opcionProyecto && opcionProyecto.map((e, i) => <option key={i} value={JSON.stringify({ nombre: e.nombre, descr: e.descripcion })}>{e.nombre}</option>)
@@ -131,7 +131,9 @@ export const DragBody = () => {
                     <li onClick={() => setActiveBtn(false)} className={!btnActive ? 'btn-active' : ''}>Notas <span>{note && note.length}</span></li>
                 </ul>
             </div>
-
+            <div className="flechas">
+                <i className="fa-solid fa-arrows-left-right-to-line"/><span>Mover para ver estado de las acciones</span>
+            </div>
             {
                 btnActive
                     ?

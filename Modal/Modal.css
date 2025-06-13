@@ -28,6 +28,7 @@
     font-size: 12px;
     max-height: 500px;
     transition: max-height 0.5 ease-in-out;
+    overflow-y: scroll;
 }
 
 .no-vis-modal {
@@ -40,8 +41,13 @@
 }
 
 @keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 input[type="checkbox"] {
@@ -55,6 +61,24 @@ input[type="checkbox"] {
     margin-bottom: 10px;
     border-radius: 25px 25px 0px 0px;
     height: 25px;
+    animation: parpadear 2s infinite;
+}
+
+@keyframes parpadear {
+    0% {
+        background-color: gray;
+        color: black;
+    }
+
+    50% {
+        background-color: #1E4053;
+        color: white;
+    }
+
+    100% {
+        background-color: gray;
+        color: black;
+    }
 }
 
 .modalComponent {
